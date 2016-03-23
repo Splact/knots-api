@@ -1,0 +1,11 @@
+{
+  "default": {
+    "versions": [
+      {
+        "label" : "Production v1",
+        "version" : "1",
+        "description" : "Production. Public access not allowed."
+      }
+    ]
+  }
+}

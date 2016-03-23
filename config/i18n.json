@@ -1,0 +1,14 @@
+{
+  "default": {
+    "defaultLocale": "en",
+    "locales": [
+      "en",
+      "it"
+    ],
+    "directory": "locales",
+    "updateFiles" : true
+  },
+  "production": {
+    "updateFiles" : false
+  }
+}

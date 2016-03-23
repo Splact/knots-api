@@ -1,0 +1,26 @@
+{
+  "default": {
+
+    "sitename" : "Knots",
+
+    "currentApiVersion" : "1.0.0",
+
+    "paths" : {},
+
+    "socialAccounts" : {
+      "twitter": ""
+    }
+  },
+  "development": {
+    "env": "development"
+  },
+  "production": {
+    "env": "production"
+  },
+  "test": {
+    "env": "test"
+  },
+  "staging": {
+    "env": "staging"
+  }
+}

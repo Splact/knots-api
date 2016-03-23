@@ -1,0 +1,12 @@
+{
+  "default": {
+    "host": "localhost",
+    "port": 27017
+  },
+  "development": {
+    "name": "dev-db-name"
+  },
+  "production": {
+    "name": "production-db-name"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "default": {
+    "facebook" : {
+      "appId" : "999999999999999",
+      "appSecret" : "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "callbackURL": ""
+    }
+  }
+}

@@ -1,1 +1,4 @@
-# knots-api
+knots-api
+===========
+
+Api for knots app
