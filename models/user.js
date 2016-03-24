@@ -24,7 +24,7 @@ var userModel = function () {
 
   /// SCHEMAS
   var userSchema = mongoose.Schema({
-    name: String,
+    displayName: String,
     username: {
       type: String,
       unique: true,
@@ -78,7 +78,7 @@ var userModel = function () {
       switch (type) {
         case constants.MODEL_VIEW_ALL:
           return {
-            name: this.name,
+            displayName: this.displayName,
             username: this.username,
             role: this.role,
             hashedPassword: this.hashedPassword,
@@ -98,7 +98,7 @@ var userModel = function () {
         case constants.MODEL_VIEW_PROFILE:
         default:
           return {
-            name: this.name,
+            displayName: this.displayName,
             username: this.username,
             role: this.role,
             loc: this.loc
