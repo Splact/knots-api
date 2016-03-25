@@ -20,23 +20,49 @@ userRouter.param('username', function(req, res, next, username) {
     if (!user)
       return res.status(404).json({ message: req.__('User not found') });
 
-    req.params.user = user;
+    req.payload.user = user;
 
     next();
   });
 });
 
-/// Defining common responses
-var currentUserResponse = function(req, res) {
-  return res.status(200).json(req.user.view(constants.MODEL_VIEW_DEFAULT));
-};
-
+/// Defining specific middlewares
 var userResponse = function(req, res) {
-  return res.status(200).json(req.params.user.view(constants.MODEL_VIEW_DEFAULT));
+  return res.status(200).json(req.payload.user.view(constants.MODEL_VIEW_DEFAULT));
 };
 
-/// Defining subroutes
-userRouter.get('/me', passport.authenticate(['bearer', 'local', 'facebook-token']), currentUserResponse);
+var targetCurrentUser = function(req, res, next) {
+  req.payload.user = req.user;
+  next();
+};
+
+var updateUserPosition = function(req, res, next) {
+  var user = req.payload.user;
+  var position = req.body.position;
+
+  // TODO: check input
+
+  user.position = position;
+  user.save();
+
+  next();
+};
+
+/// Register middlewares
+// require authentication and target current user on these paths
+userRouter.all([
+  '/me',
+  '/position'
+], passport.authenticate(['bearer', 'local', 'facebook-token']), targetCurrentUser);
+
+/// Register responses
+userRouter.get('/me', userResponse);
+
+userRouter.put([
+  '/position',
+  '/:username/position'
+], updateUserPosition, userResponse);
+
 userRouter.get('/:username', userResponse);
 
 module.exports = userRouter;

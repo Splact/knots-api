@@ -31,7 +31,8 @@ var userModel = function () {
       required: true,
       trim: true
     },
-    loc: {
+    picture: String,
+    position: {
       type: {type: String, default: 'Point', enum: ['Point']},
       coordinates: [mongoose.Schema.Types.Mixed]
     },
@@ -80,13 +81,14 @@ var userModel = function () {
           return {
             displayName: this.displayName,
             username: this.username,
+            picture: this.picture,
             role: this.role,
             hashedPassword: this.hashedPassword,
             token: this.token,
             salt: this.salt,
             facebook: this.facebook,
             active: this.active,
-            loc: this.loc,
+            position: this.position,
             createdAt: this.createdAt,
             updatedAt: this.updatedAt
           };
@@ -100,8 +102,9 @@ var userModel = function () {
           return {
             displayName: this.displayName,
             username: this.username,
+            picture: this.picture,
             role: this.role,
-            loc: this.loc
+            position: this.position
           }
       }
     }
