@@ -88,7 +88,10 @@ var userModel = function () {
             salt: this.salt,
             facebook: this.facebook,
             active: this.active,
-            position: this.position,
+            position: {
+              lat: this.position.coordinates[1],
+              lng: this.position.coordinates[0]
+            },
             createdAt: this.createdAt,
             updatedAt: this.updatedAt
           };
@@ -104,7 +107,10 @@ var userModel = function () {
             username: this.username,
             picture: this.picture,
             role: this.role,
-            position: this.position
+            position: {
+              lat: this.position.coordinates[1],
+              lng: this.position.coordinates[0]
+            }
           }
       }
     }

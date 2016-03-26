@@ -41,6 +41,9 @@ var updateUserPosition = function(req, res, next) {
   var position = req.body.position;
 
   // TODO: check input
+  position = {
+      coordinates: [ position.lng || 0, position.lat || 0]
+  };
 
   user.position = position;
   user.save();
