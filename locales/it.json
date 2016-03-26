@@ -1,5 +1,7 @@
 {
 	"Page not found.": "Page not found.",
 	"User not found.": "User not found.",
-	"Query not valid.": "Query not valid."
+	"Query not valid.": "Query not valid.",
+	"Checkin already done.": "Checkin already done.",
+	"Checkout already done.": "Checkout already done."
 }
