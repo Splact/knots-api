@@ -125,6 +125,7 @@ var userModel = function () {
     if (!this.token)
       this.token = _generateToken(this);
 
+    this.updatedAt = Date.now();
     //Continue with the save operation
     next();
   });
