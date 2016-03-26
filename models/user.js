@@ -122,7 +122,8 @@ var userModel = function () {
    */
   userSchema.pre('save', function (next) {
 
-    this.token = _generateToken(this);
+    if (!this.token)
+      this.token = _generateToken(this);
 
     //Continue with the save operation
     next();
