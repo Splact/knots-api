@@ -18,7 +18,7 @@ userRouter.param('username', function(req, res, next, username) {
       return next(err);
 
     if (!user)
-      return res.status(404).json({ message: req.__('User not found') });
+      return res.status(404).json({ message: req.__('User not found.') });
 
     req.payload.user = user;
 
