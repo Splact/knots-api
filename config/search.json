@@ -1,0 +1,8 @@
+{
+  "default": {
+    "minQueryLength": 3,
+    "limit": 10,
+    "order": "desc",
+    "page": 1
+  }
+}
