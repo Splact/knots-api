@@ -3,8 +3,7 @@
 var express               = require('express'),
     app                   = express(),
     config                = require('./lib/config'),
-    registerMiddlewares   = require('./lib/middlewares'),
-    tail                  = require('./lib/middlewares/tail'),
+    middlewares           = require('./lib/middlewares')(app),
     registerEventHandlers = require('./lib/serverEventHandlers'),
     db                    = require('./lib/database'),
     subdomain             = require('express-subdomain'),
@@ -17,15 +16,15 @@ registerEventHandlers(app);
 db.init(app); // initialize db
 db.connect(); // connect
 
-/// Register middlewares
-registerMiddlewares(app);
+/// Register head middlewares
+middlewares.head();
 
 /// Register routes
 app.use(subdomain('api', controllers));
 app.use( '/', express.static('./public') );
 
-/// Register error handler
-tail(app);
+/// Register tail middlewares
+middlewares.tail();
 
 var startFennec = function() {
   app.listen(config.http.port);
