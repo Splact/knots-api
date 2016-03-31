@@ -47,7 +47,9 @@ var show = function(req, res) {
     topics.push(t.view(constants.MODEL_VIEW_DEFAULT));
   });
 
-  return res.status(200).json(topics);
+  return res.status(200).json({
+    results: topics
+  });
 };
 
 /// Register middlewares

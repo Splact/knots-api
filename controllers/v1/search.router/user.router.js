@@ -47,7 +47,9 @@ var show = function(req, res) {
     users.push(u.view(constants.MODEL_VIEW_DEFAULT));
   });
 
-  return res.status(200).json(users);
+  return res.status(200).json({
+    results: users
+  });
 };
 
 /// Register middlewares
