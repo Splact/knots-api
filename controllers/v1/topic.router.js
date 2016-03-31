@@ -42,12 +42,16 @@ var createTopic = function(req, res, next) {
   topic.tag = tag;
   topic.users = [user._id];
   topic.createdBy = user._id;
-  topic.save();
+  topic.save(function(err, topic) {
+    if (err)
+      return res.status(400).json(err);
 
-  // keep payload updated
-  req.payload.topic = topic;
+    // keep payload updated
+    req.payload.topic = topic;
 
-  next();
+    next();
+  });
+
 };
 
 var doCheckin = function(req, res, next) {

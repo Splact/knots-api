@@ -16,7 +16,7 @@ var topicModel = function () {
       type: String,
       lowercase: true,
       trim: true,
-      match: /^[a-z]*$/,
+      match: /^[a-z\d]*$/,
       required: true,
       unique: true
     },
