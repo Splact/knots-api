@@ -9,7 +9,8 @@ var topicRouter = require('express').Router(),
     passport    = require('passport'),
     _           = require('lodash'),
     constants   = require('../../lib/constants'),
-    Topic       = require('../../models/topic');
+    Topic       = require('../../models/topic'),
+    User        = require('../../models/user');
 
 /// Defining params
 topicRouter.param('tag', function(req, res, next, tag) {
@@ -30,6 +31,31 @@ topicRouter.param('tag', function(req, res, next, tag) {
 /// Defining specific middlewares
 var topicResponse = function(req, res) {
   return res.status(200).json(req.payload.topic.view(constants.MODEL_VIEW_DEFAULT));
+};
+var loadCheckins = function(req, res, next) {
+  var topic = req.payload.topic;
+
+  User.populate(topic, { path: 'users' }, function(err, populatedTopic) {
+    // if something weird happens, abort
+    if (err)
+      return next(err);
+
+    req.payload.checkins = populatedTopic.users;
+
+    next();
+  });
+
+};
+var showCheckins = function(req, res) {
+  var users = [];
+
+  _.each(req.payload.checkins, function(u) {
+    users.push(u.view(constants.MODEL_VIEW_DEFAULT));
+  });
+
+  return res.status(200).json({
+    checkins: users
+  });
 };
 
 var createTopic = function(req, res, next) {
@@ -92,6 +118,7 @@ topicRouter.use('*', passport.authenticate(['bearer', 'local', 'facebook-token']
 
 /// Register responses
 topicRouter.post('/', createTopic, topicResponse);
+topicRouter.get('/:tag/checkins', loadCheckins, showCheckins);
 topicRouter.put('/:tag/checkins', doCheckin, topicResponse);
 topicRouter.delete('/:tag/checkins', doCheckout, topicResponse);
 topicRouter.get('/:tag', topicResponse);
