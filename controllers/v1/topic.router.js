@@ -114,7 +114,9 @@ var doCheckout = function(req, res, next) {
 
 /// Register middlewares
 // require authentication on these paths
-topicRouter.use('*', passport.authenticate(['bearer', 'local', 'facebook-token']))
+topicRouter.post('*', passport.authenticate(['bearer', 'local', 'facebook-token']));
+topicRouter.put('*', passport.authenticate(['bearer', 'local', 'facebook-token']));
+topicRouter.delete('*', passport.authenticate(['bearer', 'local', 'facebook-token']));
 
 /// Register responses
 topicRouter.post('/', createTopic, topicResponse);
