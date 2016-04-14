@@ -120,9 +120,9 @@ topicRouter.delete('*', passport.authenticate(['bearer', 'local', 'facebook-toke
 
 /// Register responses
 topicRouter.post('/', createTopic, topicResponse);
-topicRouter.get('/:tag/checkins', loadCheckins, showCheckins);
-topicRouter.put('/:tag/checkins', doCheckin, topicResponse);
-topicRouter.delete('/:tag/checkins', doCheckout, topicResponse);
+topicRouter.put('/:tag/checkins', doCheckin);
+topicRouter.delete('/:tag/checkins', doCheckout);
+topicRouter.all('/:tag/checkins', loadCheckins, showCheckins);
 topicRouter.get('/:tag', topicResponse);
 
 module.exports = topicRouter;
