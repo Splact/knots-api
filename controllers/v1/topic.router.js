@@ -119,7 +119,7 @@ topicRouter.put('*', passport.authenticate(['bearer', 'local', 'facebook-token']
 topicRouter.delete('*', passport.authenticate(['bearer', 'local', 'facebook-token']));
 
 /// Register responses
-topicRouter.post('/', createTopic, topicResponse);
+topicRouter.post('/', createTopic, loadCheckins, showCheckins);
 topicRouter.put('/:tag/checkins', doCheckin);
 topicRouter.delete('/:tag/checkins', doCheckout);
 topicRouter.all('/:tag/checkins', loadCheckins, showCheckins);
